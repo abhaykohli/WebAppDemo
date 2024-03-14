@@ -1,10 +1,17 @@
-
+# Use the official Golang image as the base image
 FROM golang:alpine
 
+# Set the working directory inside the container
 WORKDIR /app
+
+COPY go.* ./
+
+RUN go mod download
 
 COPY . .
 
 RUN go build -o main .
+
+EXPOSE 8080
 
 CMD ["./main"]
